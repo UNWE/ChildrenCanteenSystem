@@ -60,12 +60,12 @@
             this.mainMenu.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mainMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ястияToolStripMenuItem,
+            this.рецептиToolStripMenuItem,
             this.menusMenuItem,
             this.calculationsMenuItem,
             this.requestsMenuItem,
             this.reportsMenuItem,
-            this.ястияToolStripMenuItem,
-            this.рецептиToolStripMenuItem,
             this.newUserMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -217,9 +217,9 @@
             this.applicationStatus.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.applicationStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.applicationStatusLabel});
-            this.applicationStatus.Location = new System.Drawing.Point(0, 716);
+            this.applicationStatus.Location = new System.Drawing.Point(0, 718);
             this.applicationStatus.Name = "applicationStatus";
-            this.applicationStatus.Size = new System.Drawing.Size(978, 28);
+            this.applicationStatus.Size = new System.Drawing.Size(978, 26);
             this.applicationStatus.TabIndex = 3;
             this.applicationStatus.Text = "statusStrip1";
             // 
@@ -227,7 +227,7 @@
             // 
             this.applicationStatusLabel.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.applicationStatusLabel.Name = "applicationStatusLabel";
-            this.applicationStatusLabel.Size = new System.Drawing.Size(181, 23);
+            this.applicationStatusLabel.Size = new System.Drawing.Size(181, 21);
             this.applicationStatusLabel.Text = "toolStripStatusLabel1";
             // 
             // MainScreen

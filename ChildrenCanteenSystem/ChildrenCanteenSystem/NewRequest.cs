@@ -5,6 +5,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+
     using Common.DataTransferObjects;
     using Common.MessagesAndTitles;
     using Models;
@@ -18,7 +19,15 @@
         private int productEditingId;
         private bool hasSelectedAvailability;
 
-        public NewRequest(User userProfile) : base(userProfile)
+        private const int ProductsDatagridProductIdCellIndex = 0;
+        private const int ProductsDatagridPreliminaryCalculatedCellIndex = 3;
+        private const int ProductsDatagridRequestedQuantityCellIndex = 4;
+
+        private const int AvailabilitiesDatagridAvailabilityIdCellIndex = 0;
+        private const int AvailabilitiesDatagridRequestedQuantityCellIndex = 5;
+
+        public NewRequest(User userProfile)
+            : base(userProfile)
         {
             InitializeComponent();
 
@@ -41,89 +50,96 @@
         {
             date.Format = DateTimePickerFormat.Long;
             var dateSelected = date.Value.Date;
-            var preliminaryCalculationExists = this.data.PreliminaryCalculations
+            var requestExixts = this.data.Requests.All().Any(r => r.Menu.Date == dateSelected);
+            if (!requestExixts)
+            {
+                var preliminaryCalculationExists = this.data.PreliminaryCalculations
                 .All()
                 .FirstOrDefault(p => p.Menu.Date == dateSelected);
 
-            if (preliminaryCalculationExists != null)
-            {
-                var preliminaruCalculationData = this.data.PreliminaryCalculations
-                    .All()
-                    .Where(p => p.Menu.Date == date.Value.Date)
-                    .Select(
-                        p => new PreliminaryCalculationDto
-                        {
-                            ProductId = p.ProductId,
-                            ProductName = p.Product.Name,
-                            Quantity = p.Quantity
-                        }
-                    );
-
-                foreach (var product in preliminaruCalculationData)
+                if (preliminaryCalculationExists != null)
                 {
-                    this.products.Rows.Add(product.ProductId, product.ProductName, product.Quantity, 0f);
-                }
+                    var preliminaruCalculationData = this.data.PreliminaryCalculations
+                        .All()
+                        .Where(p => p.Menu.Date == date.Value.Date)
+                        .Select(PreliminaryCalculationDto.DtoModel);
+                    products.ScrollBars = ScrollBars.None;
 
-                products.Enabled = true;
-                availabilities.Enabled = true;
+                    foreach (var product in preliminaruCalculationData)
+                    {
+                        this.products.Rows.Add(product.ProductId, product.ProductName, product.MesurementUnit, product.Quantity, 0f);
+                    }
+
+                    products.ScrollBars = ScrollBars.Both;
+                    products.Enabled = true;
+                    availabilities.Enabled = true;
+                }
+                else
+                {
+                    var result = MessageBox.Show(
+                        string.Format(
+                            ConfirmMessages.NonExistingPreliminaryCalculationConfirmCreateNewMessage,
+                            dateSelected.ToLongDateString()),
+                        MessageBoxesTitles.AttentionTitle,
+                        MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        var menu = this.data.Menus
+                            .All()
+                            .FirstOrDefault(m => m.Date == dateSelected);
+                        if (menu == null)
+                        {
+                            result = MessageBox.Show(
+                                string.Format(
+                                    ConfirmMessages.NonExistingMenuConfirmCreateNewMessage,
+                                    dateSelected.ToLongDateString()),
+                                MessageBoxesTitles.AttentionTitle,
+                                MessageBoxButtons.YesNo);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                var newMenuForm = new NewMenu(this.UserProfile, dateSelected);
+                                newMenuForm.Show();
+                                this.Close();
+                            }
+                        }
+                        else
+                        {
+                            var newPreliminaryCalculationForm =
+                                new NewPreliminaryCalculation(this.UserProfile, dateSelected);
+                            newPreliminaryCalculationForm.Show();
+                            this.Close();
+                        }
+                    }
+                }
             }
             else
             {
                 var result = MessageBox.Show(
-                    string.Format(
-                        ConfirmMessages.NonExistingPreliminaryCalculationConfirmCreateNewMessage,
-                        dateSelected.ToLongDateString()),
+                    string.Format("За дата {0}  е съставено искане. Желаете ли да го прегледате сега", dateSelected.ToLongDateString()),
                     MessageBoxesTitles.AttentionTitle,
                     MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
                 {
-                    var menu = this.data.Menus
-                        .All()
-                        .FirstOrDefault(m => m.Date == dateSelected);
-                    if (menu == null)
-                    {
-                        result = MessageBox.Show(
-                            string.Format(
-                                ConfirmMessages.NonExistingMenuConfirmCreateNewMessage,
-                                dateSelected.ToLongDateString()),
-                            MessageBoxesTitles.AttentionTitle,
-                            MessageBoxButtons.YesNo);
-
-                        if (result == DialogResult.Yes)
-                        {
-                            var newMenuForm = new NewMenu(this.UserProfile, dateSelected);
-                            newMenuForm.Show();
-                            this.Close();
-                        }
-                    }
-                    else
-                    {
-                        var newPreliminaryCalculationForm =
-                            new NewPreliminaryCalculation(this.UserProfile, dateSelected);
-                        newPreliminaryCalculationForm.Show();
-                        this.Close();
-                    }
+                    // TODO open form for review request
                 }
-            }
+            } 
         }
 
         private void products_SelectionChanged(object sender, EventArgs e)
         {
-            if (products.SelectedRows.Count > 0)
+            int lastRowIndex = products.RowCount - 1;
+            productEditingRowIndex = products.SelectedRows[0].Index;
+            bool rowCanBeSelected = productEditingRowIndex < lastRowIndex;
+            if (rowCanBeSelected)
             {
-                productEditingRowIndex  = products.SelectedRows[0].Index;
-                productEditingId = (int)products.Rows[productEditingRowIndex].Cells[0].Value;
+                productEditingId = (int)products.Rows[productEditingRowIndex].Cells[ProductsDatagridProductIdCellIndex].Value;
                 var productAvailabilities = this.data.Availabilities
                     .All()
                     .Where(a => a.ProductId == productEditingId)
-                    .Select(a => new AvailabilityDto
-                    {
-                        AvailabilityId = a.Id,
-                        ProductId = a.ProductId,
-                        Batch = a.Batch,
-                        Quantity = a.Quantity
-                    });
+                    .Select(AvailabilityDto.DtoModel);
 
                 availabilities.Rows.Clear();
 
@@ -133,6 +149,7 @@
                         productAvailability.AvailabilityId,
                         productAvailability.ProductId,
                         productAvailability.Batch,
+                        productAvailability.UnitPrice,
                         productAvailability.Quantity);
                 }
 
@@ -140,18 +157,19 @@
                 {
                     if (this.requestData[productEditingId].Any())
                     {
-                        var availabilitiesRows = availabilities.Rows
-                                .Cast<DataGridViewRow>()
-                                .Take(2);
                         foreach (var availability in this.requestData[productEditingId].ToList())
                         {
-                            availabilitiesRows
-                                .First(r => r.Cells[0].Value.ToString().Equals(availability.Key.ToString()))
-                                .Cells[4].Value = availability.Value;
+                            var row = availabilities.Rows
+                                .Cast<DataGridViewRow>()
+                                .Take(2)
+                                .FirstOrDefault(r => r.Cells[AvailabilitiesDatagridAvailabilityIdCellIndex].Value.ToString().Equals(availability.Key.ToString()));
+                            if (row != null)
+                            {
+                                row.Cells[AvailabilitiesDatagridRequestedQuantityCellIndex].Value = availability.Value;
+                            }
                         }
                     }
                 }
-
             }
         }
 
@@ -159,7 +177,7 @@
         {
             if (hasSelectedAvailability)
             {
-                var cellInputValue = availabilities.Rows[availabilityEditingRowIndex].Cells[4].Value;
+                var cellInputValue = availabilities.Rows[availabilityEditingRowIndex].Cells[AvailabilitiesDatagridRequestedQuantityCellIndex].Value;
                 if (cellInputValue != null)
                 {
                     float cellValue;
@@ -180,25 +198,27 @@
                             }
 
                             this.requestData[productEditingId][availabilityEditingId] = cellValue;
-                            products.Rows[productEditingRowIndex].Cells[3].Value =
+                            products.Rows[productEditingRowIndex].Cells[ProductsDatagridRequestedQuantityCellIndex].Value =
                                 this.requestData[productEditingId].Sum(p => p.Value);
 
-                            if (((float)products.Rows[productEditingRowIndex].Cells[3].Value).Equals(
-                                (float)products.Rows[productEditingRowIndex].Cells[2].Value))
+                            if (((float)products.Rows[productEditingRowIndex].Cells[ProductsDatagridRequestedQuantityCellIndex].Value).Equals(
+                                (float)products.Rows[productEditingRowIndex].Cells[ProductsDatagridPreliminaryCalculatedCellIndex].Value))
                             {
-                                products.Rows[productEditingRowIndex].Cells[3].Style.ForeColor = Color.Green;
+                                products.Rows[productEditingRowIndex].Cells[ProductsDatagridRequestedQuantityCellIndex].Style.ForeColor = Color.Green;
                             }
                             else
                             {
-                                products.Rows[productEditingRowIndex].Cells[3].Style.ForeColor = Color.Red;
+                                products.Rows[productEditingRowIndex].Cells[ProductsDatagridRequestedQuantityCellIndex].Style.ForeColor = Color.Red;
                             }
                         }
                     }
                     else
                     {
-                        availabilities.Rows[availabilityEditingRowIndex].Cells[4].Value = string.Empty;
+                        availabilities.Rows[availabilityEditingRowIndex].Cells[AvailabilitiesDatagridRequestedQuantityCellIndex].Value = string.Empty;
                     }
-                } 
+                }
+
+                hasSelectedAvailability = false;
             }
         }
 
@@ -206,7 +226,51 @@
         {
             hasSelectedAvailability = true;
             availabilityEditingRowIndex = availabilities.SelectedRows[0].Index;
-            availabilityEditingId = (int)availabilities.SelectedRows[0].Cells[0].Value;
+            availabilityEditingId = (int)availabilities.SelectedRows[0].Cells[AvailabilitiesDatagridAvailabilityIdCellIndex].Value;
+        }
+
+        private void previewButton_Click(object sender, EventArgs e)
+        {
+            var previewRequestData = new RequestData();
+            previewRequestData.Products = this.data.PreliminaryCalculations
+                    .All()
+                    .Where(p => p.Menu.Date == date.Value.Date)
+                    .Select(PreliminaryCalculationDto.DtoModel)
+                    .ToList();
+            foreach (var product in previewRequestData.Products)
+            {
+                if (this.requestData.ContainsKey(product.ProductId))
+                {
+                    var availabilitiesRequested = this.requestData[product.ProductId].Keys.ToList();
+                    previewRequestData.Availabilities
+                        .Add(
+                            product.ProductId,
+                            this.data.Availabilities
+                                .All()
+                                .Where(a => availabilitiesRequested.Contains(a.Id))
+                                .Select(a => new AvailabilityDto
+                                {
+                                    AvailabilityId = a.Id,
+                                    ProductId = a.ProductId,
+                                    Batch = a.Batch,
+                                    UnitPrice = a.UnitPrice
+                                })
+                                .ToList());
+
+                    foreach (var availability in previewRequestData.Availabilities[product.ProductId])
+                    {
+                        availability.Quantity = this.requestData[product.ProductId][availability.AvailabilityId];
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Моля завършете искането преди да пристъпите към преглед", MessageBoxesTitles.AttentionTitle);
+                    return;
+                }
+            }
+
+            var previewRequestForm = new PreviewRequest(this.UserProfile, date.Value.Date, previewRequestData);
+            previewRequestForm.Show();
         }
     }
 }
