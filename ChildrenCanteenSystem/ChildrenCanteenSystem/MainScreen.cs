@@ -56,7 +56,9 @@
 
         private void reviewRequestMenuItem_Click(object sender, System.EventArgs e)
         {
-
+            var reviewRequestForm = new ReviewRequest();
+            reviewRequestForm.MdiParent = this;
+            reviewRequestForm.Show();
         }
 
         private void newRequestMenuItem_Click(object sender, System.EventArgs e)

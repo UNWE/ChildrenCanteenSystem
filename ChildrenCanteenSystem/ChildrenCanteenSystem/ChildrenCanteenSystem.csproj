@@ -121,6 +121,12 @@
       <DependentUpon>ReviewPreliminaryCalculation.cs</DependentUpon>
     </Compile>
     <Compile Include="Enumerations\SaveButtonState.cs" />
+    <Compile Include="ReviewRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReviewRequest.Designer.cs">
+      <DependentUpon>ReviewRequest.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CreateUser.resx">
       <DependentUpon>CreateUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReviewPreliminaryCalculation.resx">
       <DependentUpon>ReviewPreliminaryCalculation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReviewRequest.resx">
+      <DependentUpon>ReviewRequest.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

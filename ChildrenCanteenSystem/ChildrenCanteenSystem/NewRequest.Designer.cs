@@ -41,14 +41,14 @@
             this.RequestedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productsLabel = new System.Windows.Forms.Label();
             this.availabilities = new System.Windows.Forms.DataGridView();
-            this.availabilitiesLabel = new System.Windows.Forms.Label();
-            this.previewButton = new System.Windows.Forms.Button();
             this.AvailabilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Batch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AvailableQiantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RequatedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availabilitiesLabel = new System.Windows.Forms.Label();
+            this.previewButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.products)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.availabilities)).BeginInit();
             this.SuspendLayout();
@@ -166,25 +166,6 @@
             this.availabilities.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.availabilities_CellBeginEdit);
             this.availabilities.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.availabilities_CellValueChanged);
             // 
-            // availabilitiesLabel
-            // 
-            this.availabilitiesLabel.AutoSize = true;
-            this.availabilitiesLabel.Location = new System.Drawing.Point(869, 98);
-            this.availabilitiesLabel.Name = "availabilitiesLabel";
-            this.availabilitiesLabel.Size = new System.Drawing.Size(138, 27);
-            this.availabilitiesLabel.TabIndex = 5;
-            this.availabilitiesLabel.Text = "Наличности";
-            // 
-            // previewButton
-            // 
-            this.previewButton.Location = new System.Drawing.Point(489, 449);
-            this.previewButton.Name = "previewButton";
-            this.previewButton.Size = new System.Drawing.Size(167, 55);
-            this.previewButton.TabIndex = 6;
-            this.previewButton.Text = "Преглед";
-            this.previewButton.UseVisualStyleBackColor = true;
-            this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
-            // 
             // AvailabilityId
             // 
             this.AvailabilityId.HeaderText = "Код наличност";
@@ -220,6 +201,25 @@
             this.RequatedQuantity.HeaderText = "Искано количество";
             this.RequatedQuantity.Name = "RequatedQuantity";
             // 
+            // availabilitiesLabel
+            // 
+            this.availabilitiesLabel.AutoSize = true;
+            this.availabilitiesLabel.Location = new System.Drawing.Point(869, 98);
+            this.availabilitiesLabel.Name = "availabilitiesLabel";
+            this.availabilitiesLabel.Size = new System.Drawing.Size(138, 27);
+            this.availabilitiesLabel.TabIndex = 5;
+            this.availabilitiesLabel.Text = "Наличности";
+            // 
+            // previewButton
+            // 
+            this.previewButton.Location = new System.Drawing.Point(489, 449);
+            this.previewButton.Name = "previewButton";
+            this.previewButton.Size = new System.Drawing.Size(167, 55);
+            this.previewButton.TabIndex = 6;
+            this.previewButton.Text = "Преглед";
+            this.previewButton.UseVisualStyleBackColor = true;
+            this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
+            // 
             // NewRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
@@ -236,6 +236,7 @@
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "NewRequest";
             this.Text = "Ново искане";
+            this.Load += new System.EventHandler(this.NewRequest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.products)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.availabilities)).EndInit();
             this.ResumeLayout(false);

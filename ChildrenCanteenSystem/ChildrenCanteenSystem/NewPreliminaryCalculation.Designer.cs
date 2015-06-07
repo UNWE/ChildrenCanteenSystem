@@ -87,7 +87,7 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // NewPreliminaryCalcularion
+            // NewPreliminaryCalculation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,8 +99,9 @@
             this.Controls.Add(this.datePicker);
             this.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.Name = "NewPreliminaryCalcularion";
+            this.Name = "NewPreliminaryCalculation";
             this.Text = "NewPreliminaryCalcularion";
+            this.Load += new System.EventHandler(this.NewPreliminaryCalculation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

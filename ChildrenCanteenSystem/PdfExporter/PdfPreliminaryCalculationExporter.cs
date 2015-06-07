@@ -7,7 +7,7 @@
     using iTextSharp.text;
     using iTextSharp.text.pdf;
 
-    public class PdfExporter
+    public class PdfPreliminaryCalculationExporter
     {
         // File Parameters
         private readonly string[] defaultCellsHeadings = new[] { "Код", "Продукт", "Мярка", "Количество" };
@@ -30,14 +30,14 @@
         private readonly Font defaultHeadingFont = new Font(utfFont, 11);
         private readonly Font defaultCellFont = new Font(utfFont, 10);
 
-        private ExportData data { get; set; }
+        private PreliminaryCalculationExportData data;
 
-        public PdfExporter(ExportData data)
+        public PdfPreliminaryCalculationExporter(PreliminaryCalculationExportData data)
         {
             this.Data = data;
         }
 
-        public ExportData Data
+        public PreliminaryCalculationExportData Data
         {
             get { return this.data; }
 

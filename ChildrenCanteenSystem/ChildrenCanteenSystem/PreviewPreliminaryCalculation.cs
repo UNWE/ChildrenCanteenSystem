@@ -44,7 +44,7 @@
                 string filePath = savePdfFileDialog.FileName;
                 string directory = Path.GetDirectoryName(filePath);
                 string fileName = Path.GetFileName(filePath);
-                var exportData = new ExportData
+                var exportData = new PreliminaryCalculationExportData
                 {
                     Date = this.menuDate,
                     FoodCards = this.foodCards,
@@ -56,7 +56,7 @@
                     ProductsData = this.calculationData
                 };
 
-                var pdfExporter = new PdfExporter(exportData);
+                var pdfExporter = new PdfPreliminaryCalculationExporter(exportData);
                 pdfExporter.Export(directory, fileName);
             }
         }

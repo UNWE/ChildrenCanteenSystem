@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExportData.cs" />
-    <Compile Include="PdfExporter.cs" />
+    <Compile Include="PreliminaryCalculationExportData.cs" />
+    <Compile Include="PdfPreliminaryCalculationExporter.cs" />
+    <Compile Include="PdfRequestExporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestExportData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

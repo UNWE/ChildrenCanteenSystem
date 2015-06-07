@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Common.DataTransferObjects;
 
-    public class ExportData
+    public class PreliminaryCalculationExportData
     {
         public IEnumerable<string> MenuMeals { get; set; }
 

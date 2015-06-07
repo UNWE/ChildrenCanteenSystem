@@ -18,6 +18,8 @@
         private int productEditingRowIndex;
         private int productEditingId;
         private bool hasSelectedAvailability;
+        private DateTime requestDate;
+        private bool dateHasBeenInitialized = false;
 
         private const int ProductsDatagridProductIdCellIndex = 0;
         private const int ProductsDatagridPreliminaryCalculatedCellIndex = 3;
@@ -44,6 +46,35 @@
             availabilities.Enabled = false;
 
             #endregion
+        }
+
+        public NewRequest(User userProfile, DateTime date)
+            : base(userProfile)
+        {
+            InitializeComponent();
+
+            this.requestData = new Dictionary<int, Dictionary<int, float>>();
+            hasSelectedAvailability = false;
+
+            this.requestDate = date;
+            this.dateHasBeenInitialized = true;
+
+            #region Form settings
+
+            this.Text = FormsTitles.NewRequestTitle;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            products.Enabled = false;
+            availabilities.Enabled = false;
+
+            #endregion
+        }
+
+        private void NewRequest_Load(object sender, EventArgs e)
+        {
+            if (this.dateHasBeenInitialized)
+            {
+                this.date.Value = this.requestDate;
+            }
         }
 
         private void date_ValueChanged(object sender, EventArgs e)
@@ -85,32 +116,10 @@
 
                     if (result == DialogResult.Yes)
                     {
-                        var menu = this.data.Menus
-                            .All()
-                            .FirstOrDefault(m => m.Date == dateSelected);
-                        if (menu == null)
-                        {
-                            result = MessageBox.Show(
-                                string.Format(
-                                    ConfirmMessages.NonExistingMenuConfirmCreateNewMessage,
-                                    dateSelected.ToLongDateString()),
-                                MessageBoxesTitles.AttentionTitle,
-                                MessageBoxButtons.YesNo);
-
-                            if (result == DialogResult.Yes)
-                            {
-                                var newMenuForm = new NewMenu(this.UserProfile, dateSelected);
-                                newMenuForm.Show();
-                                this.Close();
-                            }
-                        }
-                        else
-                        {
-                            var newPreliminaryCalculationForm =
-                                new NewPreliminaryCalculation(this.UserProfile, dateSelected);
-                            newPreliminaryCalculationForm.Show();
-                            this.Close();
-                        }
+                        var newPreliminaryCalculationForm =
+                            new NewPreliminaryCalculation(this.UserProfile, dateSelected);
+                        newPreliminaryCalculationForm.Show();
+                        this.Close();
                     }
                 }
             }
@@ -123,7 +132,8 @@
 
                 if (result == DialogResult.Yes)
                 {
-                    // TODO open form for review request
+                    var reviewRequestForm = new ReviewRequest(dateSelected);
+                    reviewRequestForm.Show();
                 }
             } 
         }

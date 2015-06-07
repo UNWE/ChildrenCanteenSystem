@@ -12,6 +12,8 @@
     public partial class NewPreliminaryCalculation : BaseForm
     {
         private bool menuForDateExists;
+        private DateTime calculationDate;
+        private bool calculationDateHasBeenInitialized = false;
 
         public NewPreliminaryCalculation(User userProfile, DateTime date)
             : base(userProfile)
@@ -22,7 +24,8 @@
 
             AllDataSelected += this.CalculationDataSelected;
 
-            this.datePicker.Value = date;
+            this.calculationDate = date;
+            this.calculationDateHasBeenInitialized = true;
 
             #region Form settings
 
@@ -71,6 +74,14 @@
             else
             {
                 previewButton.Enabled = false;
+            }
+        }
+
+        private void NewPreliminaryCalculation_Load(object sender, EventArgs e)
+        {
+            if (this.calculationDateHasBeenInitialized)
+            {
+                this.datePicker.Value = this.calculationDate;
             }
         }
 
