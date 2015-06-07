@@ -1,6 +1,8 @@
 ﻿namespace ChildrenCanteenSystem
 {
     using System.Linq;
+    using System.Windows.Forms;
+    using Common.MessagesAndTitles;
     using Enumerations;
     using Events;
 
@@ -16,7 +18,7 @@
 
         private event DataSelectedEventHandler DataSelected;
 
-        protected virtual void OnDataSelected(DataSelectedEventArgs e)
+        private void OnDataSelected(DataSelectedEventArgs e)
         {
             DataSelectedEventHandler handler = DataSelected;
 
@@ -37,6 +39,12 @@
                 var userProfile = this.data.Users.All().First(u => u.Username == usernameInput);
                 var mainScreen = new MainScreen(userProfile);
                 mainScreen.Show();
+            }
+            else
+            {
+                MessageBox.Show(ErrorMessages.LoginFailedMessage, MessageBoxesTitles.AttentionTitle);
+                username.Clear();
+                password.Clear();
             }
         }
 

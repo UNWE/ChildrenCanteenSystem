@@ -42,14 +42,17 @@
             this.reportsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsByCalculationsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsByRequestsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newUserMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ястияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.прегледToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.новоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рецептиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.прегледToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.новаРецептаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newUserMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applicationStatus = new System.Windows.Forms.StatusStrip();
+            this.applicationStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
+            this.applicationStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -160,13 +163,6 @@
             this.reportsByRequestsMenuItem.Size = new System.Drawing.Size(258, 34);
             this.reportsByRequestsMenuItem.Text = "По искания";
             // 
-            // newUserMenuItem
-            // 
-            this.newUserMenuItem.Name = "newUserMenuItem";
-            this.newUserMenuItem.Size = new System.Drawing.Size(205, 33);
-            this.newUserMenuItem.Text = "Нов потребител";
-            this.newUserMenuItem.Click += new System.EventHandler(this.newUserMenuItem_Click);
-            // 
             // ястияToolStripMenuItem
             // 
             this.ястияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -209,11 +205,37 @@
             this.новаРецептаToolStripMenuItem.Size = new System.Drawing.Size(238, 34);
             this.новаРецептаToolStripMenuItem.Text = "Нова рецепта";
             // 
+            // newUserMenuItem
+            // 
+            this.newUserMenuItem.Name = "newUserMenuItem";
+            this.newUserMenuItem.Size = new System.Drawing.Size(205, 33);
+            this.newUserMenuItem.Text = "Нов потребител";
+            this.newUserMenuItem.Click += new System.EventHandler(this.newUserMenuItem_Click);
+            // 
+            // applicationStatus
+            // 
+            this.applicationStatus.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.applicationStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.applicationStatusLabel});
+            this.applicationStatus.Location = new System.Drawing.Point(0, 716);
+            this.applicationStatus.Name = "applicationStatus";
+            this.applicationStatus.Size = new System.Drawing.Size(978, 28);
+            this.applicationStatus.TabIndex = 3;
+            this.applicationStatus.Text = "statusStrip1";
+            // 
+            // applicationStatusLabel
+            // 
+            this.applicationStatusLabel.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.applicationStatusLabel.Name = "applicationStatusLabel";
+            this.applicationStatusLabel.Size = new System.Drawing.Size(181, 23);
+            this.applicationStatusLabel.Text = "toolStripStatusLabel1";
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 744);
+            this.Controls.Add(this.applicationStatus);
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -224,6 +246,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.applicationStatus.ResumeLayout(false);
+            this.applicationStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,5 +275,7 @@
         private System.Windows.Forms.ToolStripMenuItem рецептиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem прегледToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem новаРецептаToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip applicationStatus;
+        private System.Windows.Forms.ToolStripStatusLabel applicationStatusLabel;
     }
 }

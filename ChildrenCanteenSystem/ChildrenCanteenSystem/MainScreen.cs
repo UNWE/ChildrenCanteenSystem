@@ -18,6 +18,7 @@
             this.StartPosition = FormStartPosition.CenterScreen;
             this.IsMdiContainer = true;
             this.newUserMenuItem.Visible = this.UserProfile.Roles.Any(r => r.Name == "Administrator");
+            this.applicationStatusLabel.Text = "Потребител: " + this.UserProfile.Username;
 
             #endregion
         }

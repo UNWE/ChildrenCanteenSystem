@@ -2,7 +2,11 @@
 {
     using System;
     using System.Linq;
+    using System.Windows.Forms;
 
+    using Common.MessagesAndTitles;
+    using Enumerations;
+    using Events;
     using Models;
 
     public partial class CreateUser : BaseForm
@@ -11,37 +15,128 @@
             : base(userProfile)
         {
             InitializeComponent();
+            this.DataSelected += this.SelectData;
+            newUserButton.Enabled = false;
+        }
+
+        private event DataSelectedEventHandler DataSelected;
+
+        private void OnDataSelected(DataSelectedEventArgs e)
+        {
+            DataSelectedEventHandler handler = DataSelected;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private void SelectData(object sender, DataSelectedEventArgs e)
+        {
+            if (e.SaveButtonState == SaveButtonState.Enabled)
+            {
+                this.newUserButton.Enabled = true;
+            }
+            else
+            {
+                this.newUserButton.Enabled = false;
+            }
         }
 
         private void newUserButton_Click(object sender, EventArgs e)
         {
-            var firstNameInput = firstName.Text;
-            var lastNameInput = lastName.Text;
             var usernameInput = username.Text;
-            var passwordInput = password.Text;
-            var isAdminInput = isAdmin.Checked;
-
-            var newUser = new User
+            if (!this.data.Users.All().Any(u => u.Username == usernameInput))
             {
-                FirstName = firstNameInput,
-                LastName = lastNameInput,
-                Username = usernameInput,
-                Password = this.GetPasswordHash(passwordInput)
-            };
+                var firstNameInput = firstName.Text;
+                var lastNameInput = lastName.Text;
+                var passwordInput = password.Text;
+                var isAdminInput = isAdmin.Checked;
 
-            if (isAdminInput)
-            {
-                var adminRole = this.data.Roles.All().First(r => r.Name == "Administrator");
-                newUser.Roles.Add(adminRole);
+                var newUser = new User
+                {
+                    FirstName = firstNameInput,
+                    LastName = lastNameInput,
+                    Username = usernameInput,
+                    Password = this.GetPasswordHash(passwordInput)
+                };
+
+                if (isAdminInput)
+                {
+                    var adminRole = this.data.Roles.All().First(r => r.Name == "Administrator");
+                    newUser.Roles.Add(adminRole);
+                }
+
+                this.data.Users.Add(newUser);
+                this.data.SaveChanges();
             }
-
-            this.data.Users.Add(newUser);
-            this.data.SaveChanges();
+            else
+            {
+                MessageBox.Show(
+                    string.Format(ErrorMessages.UsernameIsAlreadyTaken, usernameInput),
+                    MessageBoxesTitles.AttentionTitle);
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void firstName_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.lastName.Text) &&
+                !string.IsNullOrEmpty(this.username.Text) &&
+                !string.IsNullOrEmpty(this.password.Text))
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
+            }
+            else
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
+            }
+        }
+
+        private void lastName_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.firstName.Text) &&
+                !string.IsNullOrEmpty(this.username.Text) &&
+                !string.IsNullOrEmpty(this.password.Text))
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
+            }
+            else
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
+            }
+        }
+
+        private void username_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.firstName.Text) &&
+                !string.IsNullOrEmpty(this.lastName.Text) &&
+                !string.IsNullOrEmpty(this.password.Text))
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
+            }
+            else
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
+            }
+        }
+
+        private void password_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.firstName.Text) &&
+                !string.IsNullOrEmpty(this.lastName.Text) &&
+                !string.IsNullOrEmpty(this.username.Text))
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
+            }
+            else
+            {
+                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
+            }
         }
     }
 }
