@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChildrenCanteeenSystem.Models", "ChildrenCanteeenSystem.Models", "{413ED00A-856B-4140-A91D-856ADDA57720}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChildrenCanteenSystem.Data", "ChildrenCanteenSystem.Data", "{106B92C4-43C1-4522-A359-B1648CA70A4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{ABA9C8EC-A69C-4FC3-9DD9-B0BDD4456352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{DD2FEA4A-F8E1-4385-80E3-3A7E936B4646}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChildrenCanteenSystem.Common", "ChildrenCanteenSystem.Common", "{7E699F91-A7CC-450F-9231-7588FAD287DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{E315F5D6-D5DD-4B0B-BC61-6E0502EBA651}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChildrenCanteenSystem.Application", "ChildrenCanteenSystem.Application", "{6435195D-CB54-4893-9AB5-350ADACFD975}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChildrenCanteenSystem", "ChildrenCanteenSystem\ChildrenCanteenSystem.csproj", "{CC6C740C-99EC-47F7-AE0B-F7D970C34F9F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BFC45F66-5105-4A87-9A98-B5BA0FFF1111}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfExporter", "PdfExporter\PdfExporter.csproj", "{0FB62DFF-FB96-49BB-96DD-96DC5406BF2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABA9C8EC-A69C-4FC3-9DD9-B0BDD4456352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA9C8EC-A69C-4FC3-9DD9-B0BDD4456352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA9C8EC-A69C-4FC3-9DD9-B0BDD4456352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA9C8EC-A69C-4FC3-9DD9-B0BDD4456352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD2FEA4A-F8E1-4385-80E3-3A7E936B4646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2FEA4A-F8E1-4385-80E3-3A7E936B4646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2FEA4A-F8E1-4385-80E3-3A7E936B4646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2FEA4A-F8E1-4385-80E3-3A7E936B4646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E315F5D6-D5DD-4B0B-BC61-6E0502EBA651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E315F5D6-D5DD-4B0B-BC61-6E0502EBA651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E315F5D6-D5DD-4B0B-BC61-6E0502EBA651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E315F5D6-D5DD-4B0B-BC61-6E0502EBA651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6C740C-99EC-47F7-AE0B-F7D970C34F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6C740C-99EC-47F7-AE0B-F7D970C34F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6C740C-99EC-47F7-AE0B-F7D970C34F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6C740C-99EC-47F7-AE0B-F7D970C34F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB62DFF-FB96-49BB-96DD-96DC5406BF2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB62DFF-FB96-49BB-96DD-96DC5406BF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB62DFF-FB96-49BB-96DD-96DC5406BF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB62DFF-FB96-49BB-96DD-96DC5406BF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ABA9C8EC-A69C-4FC3-9DD9-B0BDD4456352} = {413ED00A-856B-4140-A91D-856ADDA57720}
+		{DD2FEA4A-F8E1-4385-80E3-3A7E936B4646} = {106B92C4-43C1-4522-A359-B1648CA70A4D}
+		{E315F5D6-D5DD-4B0B-BC61-6E0502EBA651} = {7E699F91-A7CC-450F-9231-7588FAD287DF}
+		{CC6C740C-99EC-47F7-AE0B-F7D970C34F9F} = {6435195D-CB54-4893-9AB5-350ADACFD975}
+		{0FB62DFF-FB96-49BB-96DD-96DC5406BF2C} = {7E699F91-A7CC-450F-9231-7588FAD287DF}
+	EndGlobalSection
+EndGlobal
