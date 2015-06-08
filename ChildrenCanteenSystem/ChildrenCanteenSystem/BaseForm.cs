@@ -36,7 +36,9 @@
 
         protected bool AuthoriseUserAccess(string username, string password)
         {
-            User userProfile = this.data.Users.All().FirstOrDefault(u => u.Username == username);
+            User userProfile = this.data.Users
+                .All()
+                .FirstOrDefault(u => u.Username == username);
             if (userProfile != null)
             {
                 string userPassword = userProfile.Password;

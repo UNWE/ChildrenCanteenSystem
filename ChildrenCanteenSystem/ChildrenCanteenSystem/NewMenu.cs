@@ -27,10 +27,10 @@
             #endregion
         }
 
-        public NewMenu(User userProfile, DateTime dateSearchTerm)
+        public NewMenu(User userProfile, DateTime menuDate)
             : this(userProfile)
         {
-            this.datePicker.Value = dateSearchTerm;
+            this.datePicker.Value = menuDate;
         }
 
         private event DataSelectedEventHandler DataSelected;

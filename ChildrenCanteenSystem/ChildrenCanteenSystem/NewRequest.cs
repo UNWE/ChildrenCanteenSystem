@@ -121,6 +121,11 @@
                         newPreliminaryCalculationForm.Show();
                         this.Close();
                     }
+                    else
+                    {
+                        date.Format = DateTimePickerFormat.Custom;
+                        date.CustomFormat = " ";
+                    }
                 }
             }
             else

@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Windows.Forms;
+
     using Common.MessagesAndTitles;
     using Models;
 
@@ -73,6 +74,20 @@
             var newUserForm = new CreateUser(this.UserProfile);
             newUserForm.MdiParent = this;
             newUserForm.Show();
+        }
+
+        private void reviewMealsMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var reviewMealsForm = new ReviewMeals(this.UserProfile);
+            reviewMealsForm.MdiParent = this;
+            reviewMealsForm.Show();
+        }
+
+        private void newMealMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var newMealForm = new NewMeal();
+            newMealForm.MdiParent = this;
+            newMealForm.Show();
         }
     }
 }

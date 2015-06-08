@@ -29,16 +29,11 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.date = new System.Windows.Forms.DateTimePicker();
             this.dateLabel = new System.Windows.Forms.Label();
             this.products = new System.Windows.Forms.DataGridView();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MeasurementUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityNeeded = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RequestedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productsLabel = new System.Windows.Forms.Label();
             this.availabilities = new System.Windows.Forms.DataGridView();
             this.AvailabilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +44,11 @@
             this.RequatedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.availabilitiesLabel = new System.Windows.Forms.Label();
             this.previewButton = new System.Windows.Forms.Button();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MeasurementUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityNeeded = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RequestedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.products)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.availabilities)).BeginInit();
             this.SuspendLayout();
@@ -96,38 +96,6 @@
             this.products.Size = new System.Drawing.Size(547, 289);
             this.products.TabIndex = 2;
             this.products.SelectionChanged += new System.EventHandler(this.products_SelectionChanged);
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "Код";
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            // 
-            // Product
-            // 
-            this.Product.HeaderText = "Продукт";
-            this.Product.Name = "Product";
-            this.Product.ReadOnly = true;
-            // 
-            // MeasurementUnit
-            // 
-            this.MeasurementUnit.HeaderText = "Мярка";
-            this.MeasurementUnit.Name = "MeasurementUnit";
-            this.MeasurementUnit.ReadOnly = true;
-            // 
-            // QuantityNeeded
-            // 
-            this.QuantityNeeded.HeaderText = "Количество по калкулация";
-            this.QuantityNeeded.Name = "QuantityNeeded";
-            this.QuantityNeeded.ReadOnly = true;
-            // 
-            // RequestedQuantity
-            // 
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
-            this.RequestedQuantity.DefaultCellStyle = dataGridViewCellStyle2;
-            this.RequestedQuantity.HeaderText = "Искано количество";
-            this.RequestedQuantity.Name = "RequestedQuantity";
-            this.RequestedQuantity.ReadOnly = true;
             // 
             // productsLabel
             // 
@@ -220,6 +188,38 @@
             this.previewButton.UseVisualStyleBackColor = true;
             this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
             // 
+            // Code
+            // 
+            this.Code.HeaderText = "Код";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            // 
+            // Product
+            // 
+            this.Product.HeaderText = "Продукт";
+            this.Product.Name = "Product";
+            this.Product.ReadOnly = true;
+            // 
+            // MeasurementUnit
+            // 
+            this.MeasurementUnit.HeaderText = "Мярка";
+            this.MeasurementUnit.Name = "MeasurementUnit";
+            this.MeasurementUnit.ReadOnly = true;
+            // 
+            // QuantityNeeded
+            // 
+            this.QuantityNeeded.HeaderText = "Количество по калкулация";
+            this.QuantityNeeded.Name = "QuantityNeeded";
+            this.QuantityNeeded.ReadOnly = true;
+            // 
+            // RequestedQuantity
+            // 
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.RequestedQuantity.DefaultCellStyle = dataGridViewCellStyle2;
+            this.RequestedQuantity.HeaderText = "Искано количество";
+            this.RequestedQuantity.Name = "RequestedQuantity";
+            this.RequestedQuantity.ReadOnly = true;
+            // 
             // NewRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
@@ -253,16 +253,16 @@
         private System.Windows.Forms.DataGridView availabilities;
         private System.Windows.Forms.Label availabilitiesLabel;
         private System.Windows.Forms.Button previewButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MeasurementUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityNeeded;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RequestedQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn AvailabilityId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Batch;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnitPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn AvailableQiantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn RequatedQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Product;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MeasurementUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityNeeded;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RequestedQuantity;
     }
 }
