@@ -175,12 +175,14 @@
             this.reportsByCalculationsMenuItem.Name = "reportsByCalculationsMenuItem";
             this.reportsByCalculationsMenuItem.Size = new System.Drawing.Size(258, 34);
             this.reportsByCalculationsMenuItem.Text = "По калкулации";
+            this.reportsByCalculationsMenuItem.Click += new System.EventHandler(this.reportsByCalculationsMenuItem_Click);
             // 
             // reportsByRequestsMenuItem
             // 
             this.reportsByRequestsMenuItem.Name = "reportsByRequestsMenuItem";
             this.reportsByRequestsMenuItem.Size = new System.Drawing.Size(258, 34);
             this.reportsByRequestsMenuItem.Text = "По искания";
+            this.reportsByRequestsMenuItem.Click += new System.EventHandler(this.reportsByRequestsMenuItem_Click);
             // 
             // newUserMenuItem
             // 

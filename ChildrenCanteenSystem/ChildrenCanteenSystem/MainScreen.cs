@@ -89,5 +89,19 @@
             newMealForm.MdiParent = this;
             newMealForm.Show();
         }
+
+        private void reportsByCalculationsMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var reportForm = new PreliminaryCalculationsReports();
+            reportForm.MdiParent = this;
+            reportForm.Show();
+        }
+
+        private void reportsByRequestsMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var reportForm = new RequestsReports();
+            reportForm.MdiParent = this;
+            reportForm.Show();
+        }
     }
 }
