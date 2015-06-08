@@ -19,9 +19,9 @@
                    .WithMany(meal => meal.Menus)
                    .Map(mm =>
                    {
-                       mm.MapLeftKey("MenuId");
-                       mm.MapRightKey("MealId");
-                       mm.ToTable("MenuMeals");
+                       mm.MapLeftKey("КодМеню");
+                       mm.MapRightKey("КодЯстие");
+                       mm.ToTable("МенюЯстия");
                    });
 
             modelBuilder.Entity<User>()
@@ -29,9 +29,9 @@
                 .WithMany(t => t.Users)
                 .Map(m =>
                 {
-                    m.ToTable("UserRoles");
-                    m.MapLeftKey("UserId");
-                    m.MapRightKey("RoleId");
+                    m.MapLeftKey("КодПотребител");
+                    m.MapRightKey("КодРоля");
+                    m.ToTable("ПотребителРоли");
                 });
 
             base.OnModelCreating(modelBuilder);
