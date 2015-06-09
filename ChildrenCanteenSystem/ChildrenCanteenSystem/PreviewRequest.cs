@@ -5,6 +5,7 @@
     using System.Windows.Forms;
 
     using Common.DataTransferObjects;
+    using Common.MessagesAndTitles;
     using Models;
 
     public partial class PreviewRequest : BaseForm
@@ -57,7 +58,9 @@
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("", "", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show(
+                ConfirmMessages.ConfirmSaveRequestMessage,
+                MessageBoxesTitles.ConfirmTitle, MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 var menuId = this.data.Menus.All().First(m => m.Date == this.date).Id;
@@ -83,11 +86,15 @@
                 var saveResult = this.data.SaveChanges();
                 if (saveResult > 0)
                 {
-                    MessageBox.Show("Success", "");
+                    MessageBox.Show(
+                        SuccessMessages.RequestSavedSuccessfullyMessage,
+                        MessageBoxesTitles.SuccessTitle);
                 }
                 else
                 {
-                    MessageBox.Show("Failed", "");
+                    MessageBox.Show(
+                        ErrorMessages.RequestSaveErrorMessage,
+                        MessageBoxesTitles.AttentionTitle);
                 }
             }
         }

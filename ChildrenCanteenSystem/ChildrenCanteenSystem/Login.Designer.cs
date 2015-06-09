@@ -54,7 +54,7 @@
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(96, 111);
+            this.usernameLabel.Location = new System.Drawing.Point(148, 114);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(234, 29);
             this.usernameLabel.TabIndex = 2;

@@ -71,7 +71,9 @@
             if (!menuExists)
             {
                 var dialogResult = MessageBox.Show(
-                      string.Format("Няма намерено меню за дата {0} Желаете ли да добавите ново меню", dateSelected.ToLongDateString()),
+                      string.Format(
+                        ConfirmMessages.NotExistingMenuConfirmCreateNew,
+                        dateSelected.ToLongDateString()),
                       MessageBoxesTitles.AttentionTitle,
                       MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)

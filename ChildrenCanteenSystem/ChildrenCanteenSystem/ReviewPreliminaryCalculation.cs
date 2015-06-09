@@ -158,7 +158,12 @@
                 }
                 else
                 {
-                    var result = MessageBox.Show("Няма предварителна калкулация за посочената дата. Желаете ли да добавите сега", MessageBoxesTitles.AttentionTitle, MessageBoxButtons.YesNo);
+                    var result = MessageBox.Show(
+                        string.Format(
+                            ConfirmMessages.NonExistingPreliminaryCalculationConfirmCreateNewMessage,
+                            menuDate),
+                        MessageBoxesTitles.AttentionTitle,
+                        MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
                         var newMenuForm = new NewPreliminaryCalculation(this.UserProfile, this.date);
@@ -169,7 +174,12 @@
             }
             else
             {
-                var result = MessageBox.Show("Няма меню за посочената дата. Желаете ли да добавите сега", MessageBoxesTitles.AttentionTitle, MessageBoxButtons.YesNo);
+                var result = MessageBox.Show(
+                    string.Format(
+                        ConfirmMessages.NotExistingMenuConfirmCreateNew,
+                        menuDate),
+                    MessageBoxesTitles.AttentionTitle,
+                    MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     var newMenuForm = new NewMenu(this.UserProfile, this.date);

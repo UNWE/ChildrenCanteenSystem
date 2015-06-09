@@ -131,7 +131,9 @@
             else
             {
                 var result = MessageBox.Show(
-                    string.Format("За дата {0}  е съставено искане. Желаете ли да го прегледате сега", dateSelected.ToLongDateString()),
+                    string.Format(
+                        ConfirmMessages.ExistingRequestConfirmPreviewMessage,
+                        dateSelected.ToLongDateString()),
                     MessageBoxesTitles.AttentionTitle,
                     MessageBoxButtons.YesNo);
 
@@ -279,7 +281,9 @@
                 }
                 else
                 {
-                    MessageBox.Show("Моля завършете искането преди да пристъпите към преглед", MessageBoxesTitles.AttentionTitle);
+                    MessageBox.Show(
+                        ErrorMessages.NotFinishedRequestMessage,
+                        MessageBoxesTitles.AttentionTitle);
                     return;
                 }
             }

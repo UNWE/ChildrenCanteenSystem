@@ -62,7 +62,7 @@
 
             mealType.DataSource = new BindingSource(mealTypes, null);
             mealType.DisplayMember = "Value";
-            mealType.ValueMember = "Key"; ;
+            mealType.ValueMember = "Key";
 
             var productsEntities = this.data.Products
                 .All()
@@ -130,8 +130,8 @@
         private void saveButton_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(
-                "Желаете ли да запазите ястието",
-                "",
+                Common.MessagesAndTitles.ConfirmMessages.ConfirmSaveMealMessage,
+                Common.MessagesAndTitles.MessageBoxesTitles.ConfirmTitle,
                 MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
@@ -168,18 +168,24 @@
                     var saveResult = this.data.SaveChanges();
                     if (saveResult > 0)
                     {
-                        MessageBox.Show("Ястието бе запазено успешно", "");
+                        MessageBox.Show(
+                            Common.MessagesAndTitles.SuccessMessages.MealSavedSuccessfullyMessage,
+                            Common.MessagesAndTitles.MessageBoxesTitles.SuccessTitle);
                     }
                     else
                     {
-                        MessageBox.Show("Ястието ke бе запазено успешно. Моля опитайте отново", "");
+                        MessageBox.Show(
+                            Common.MessagesAndTitles.ErrorMessages.MealNotSavedErrorMessage,
+                            Common.MessagesAndTitles.MessageBoxesTitles.AttentionTitle);
                     }
                 }
                 else
                 {
                     MessageBox.Show(
-                        string.Format("Ястие с име {0} вече съществува", mealType.Text),
-                        "");
+                        string.Format(
+                            Common.MessagesAndTitles.ErrorMessages.MealNameAlreadyTakenMessage,
+                            mealName.Text),
+                        Common.MessagesAndTitles.MessageBoxesTitles.AttentionTitle);
                 }
             }
         }

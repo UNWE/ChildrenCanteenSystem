@@ -51,7 +51,9 @@
             }
             else
             {
-                MessageBox.Show("Моля изберете валиден интервал", MessageBoxesTitles.AttentionTitle);
+                MessageBox.Show(
+                    ErrorMessages.NotAValidDateInterval,
+                    MessageBoxesTitles.AttentionTitle);
             }
         }
     }

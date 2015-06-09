@@ -21,7 +21,7 @@
         public string FirstName { get; set; }
 
         [Required]
-        [Column("Фамиилия")]
+        [Column("Фамилия")]
         public string LastName { get; set; }
 
         [Required]

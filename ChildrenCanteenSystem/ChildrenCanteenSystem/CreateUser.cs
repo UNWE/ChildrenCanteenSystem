@@ -68,7 +68,23 @@
                 }
 
                 this.data.Users.Add(newUser);
-                this.data.SaveChanges();
+                var saveResult = this.data.SaveChanges();
+                if (saveResult > 0)
+                {
+                    MessageBox.Show(
+                        SuccessMessages.UserCteatedSuccessfullyMessage,
+                        MessageBoxesTitles.SuccessTitle);
+                    firstName.Clear();
+                    lastName.Clear();
+                    password.Clear();
+                    isAdmin.Checked = false;
+                }
+                else
+                {
+                    MessageBox.Show(
+                        ErrorMessages.UserCreateErrorMessage,
+                        MessageBoxesTitles.AttentionTitle);
+                }
             }
             else
             {

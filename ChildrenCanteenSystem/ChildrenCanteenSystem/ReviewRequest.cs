@@ -59,7 +59,7 @@
             {
                 var result = MessageBox.Show(
                     string.Format(
-                        "За дата {0} няма съставено искане. Желаете ли да съставите сега",
+                        ConfirmMessages.NonExistingRequestConfirmCreateNew,
                         this.requestDate.ToLongDateString()),
                     MessageBoxesTitles.AttentionTitle, MessageBoxButtons.YesNo);
 
