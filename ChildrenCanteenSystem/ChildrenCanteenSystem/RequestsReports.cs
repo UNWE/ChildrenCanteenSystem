@@ -14,6 +14,7 @@
 
         private void reportButton_Click(object sender, EventArgs e)
         {
+            products.Rows.Clear();
             var fromDateSelected = fromDate.Value.Date;
             var toDateSelected = toDate.Value.Date;
 

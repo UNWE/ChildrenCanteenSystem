@@ -101,51 +101,30 @@
 
         private void firstName_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(this.lastName.Text) &&
-                !string.IsNullOrEmpty(this.username.Text) &&
-                !string.IsNullOrEmpty(this.password.Text))
-            {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
-            }
-            else
-            {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
-            }
+            this.CheckForEmptyData();
         }
 
         private void lastName_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(this.firstName.Text) &&
-                !string.IsNullOrEmpty(this.username.Text) &&
-                !string.IsNullOrEmpty(this.password.Text))
-            {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
-            }
-            else
-            {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
-            }
+            this.CheckForEmptyData();
         }
 
         private void username_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(this.firstName.Text) &&
-                !string.IsNullOrEmpty(this.lastName.Text) &&
-                !string.IsNullOrEmpty(this.password.Text))
-            {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
-            }
-            else
-            {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
-            }
+            this.CheckForEmptyData();
         }
 
         private void password_TextChanged(object sender, EventArgs e)
         {
+            this.CheckForEmptyData();
+        }
+
+        private void CheckForEmptyData()
+        {
             if (!string.IsNullOrEmpty(this.firstName.Text) &&
                 !string.IsNullOrEmpty(this.lastName.Text) &&
-                !string.IsNullOrEmpty(this.username.Text))
+                !string.IsNullOrEmpty(this.username.Text) &&
+                !string.IsNullOrEmpty(this.password.Text))
             {
                 this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
             }
