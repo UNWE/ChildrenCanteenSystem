@@ -15,6 +15,12 @@
 
             this.DataSelected += this.SelectData;
             this.enterButton.Enabled = false;
+
+            #region Form settings
+
+            this.Text = FormsTitles.LoginTitle;
+
+            #endregion
         }
 
         private event DataSelectedEventHandler DataSelected;
@@ -26,26 +32,6 @@
             if (handler != null)
             {
                 handler(this, e);
-            }
-        }
-
-        private void enterButton_Click(object sender, System.EventArgs e)
-        {
-            var passwordInput = password.Text;
-            var usernameInput = username.Text;
-            bool loginSuccessful = this.AuthoriseUserAccess(usernameInput, passwordInput);
-            if (loginSuccessful)
-            {
-                this.Hide();
-                var userProfile = this.data.Users.All().First(u => u.Username == usernameInput);
-                var mainScreen = new MainScreen(userProfile);
-                mainScreen.Show();
-            }
-            else
-            {
-                MessageBox.Show(ErrorMessages.LoginFailedMessage, MessageBoxesTitles.AttentionTitle);
-                username.Clear();
-                password.Clear();
             }
         }
 
@@ -63,6 +49,16 @@
 
         private void username_TextChanged(object sender, System.EventArgs e)
         {
+            this.CheckForEmptyData();
+        }
+
+        private void password_TextChanged(object sender, System.EventArgs e)
+        {
+            this.CheckForEmptyData();
+        }
+
+        private void CheckForEmptyData()
+        {
             if (!string.IsNullOrEmpty(this.username.Text) && !string.IsNullOrEmpty(this.password.Text))
             {
                 this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
@@ -73,15 +69,25 @@
             }
         }
 
-        private void password_TextChanged(object sender, System.EventArgs e)
+        private void enterButton_Click(object sender, System.EventArgs e)
         {
-            if (!string.IsNullOrEmpty(this.username.Text) && !string.IsNullOrEmpty(this.password.Text))
+            var passwordInput = password.Text;
+            var usernameInput = username.Text;
+            bool loginSuccessful = this.AuthoriseUserAccess(usernameInput, passwordInput);
+            if (loginSuccessful)
             {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Enabled));
+                this.Hide();
+                var userProfile = this.data.Users
+                    .All()
+                    .First(u => u.Username == usernameInput);
+                var mainScreen = new MainScreen(userProfile);
+                mainScreen.Show();
             }
             else
             {
-                this.OnDataSelected(new DataSelectedEventArgs(SaveButtonState.Disabled));
+                MessageBox.Show(ErrorMessages.LoginFailedMessage, MessageBoxesTitles.AttentionTitle);
+                username.Clear();
+                password.Clear();
             }
         }
     }

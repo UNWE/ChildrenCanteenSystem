@@ -219,7 +219,8 @@
                                 this.requestData[productEditingId].Sum(p => p.Value);
 
                             if (((float)products.Rows[productEditingRowIndex].Cells[ProductsDatagridRequestedQuantityCellIndex].Value).Equals(
-                                (float)products.Rows[productEditingRowIndex].Cells[ProductsDatagridPreliminaryCalculatedCellIndex].Value))
+                                (float)products.Rows[productEditingRowIndex].Cells[ProductsDatagridPreliminaryCalculatedCellIndex].Value)
+                                )
                             {
                                 products.Rows[productEditingRowIndex].Cells[ProductsDatagridRequestedQuantityCellIndex].Style.ForeColor = Color.Green;
                             }

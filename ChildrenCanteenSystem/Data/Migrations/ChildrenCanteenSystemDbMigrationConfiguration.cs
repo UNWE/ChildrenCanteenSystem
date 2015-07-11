@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
+
     using Context;
     using Models;
 
@@ -21,6 +22,7 @@
         {
             if (!context.Products.Any())
             {
+                this.AddUsers(context);
                 this.AddAdminUser(context);
                 this.AddMeasurementUnits(context);
                 this.AddProducts(context);
@@ -62,6 +64,40 @@
                 context.Users.Add(adminUser);
                 context.SaveChanges();
             }
+        }
+
+        private void AddUsers(ChildrenSystemDbContext context)
+        {
+            HashAlgorithm hash = new MD5CryptoServiceProvider();
+
+            string password = "123456";
+            string hashPass =
+                Convert.ToBase64String(hash.ComputeHash(Encoding.ASCII.GetBytes(password)));
+
+
+            var mariaUser = new User
+            {
+                FirstName = "Maria",
+                LastName = "Ivanova",
+                Username = "maria",
+                Password = hashPass,
+            };
+
+            context.SaveChanges();
+            context.Users.Add(mariaUser);
+            context.SaveChanges();
+
+            var nikolaUser = new User
+            {
+                FirstName = "Nikola",
+                LastName = "Petrov",
+                Username = "nikola",
+                Password = hashPass,
+            };
+
+            context.SaveChanges();
+            context.Users.Add(nikolaUser);
+            context.SaveChanges();
         }
 
         private void AddMeasurementUnits(ChildrenSystemDbContext context)
@@ -109,7 +145,7 @@
                 new Product
                 {
                     Name = "Ванилия",
-                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "бр")
                 },
                 new Product
                 {
@@ -204,7 +240,7 @@
                 new Product
                 {
                     Name = "Нектар",
-                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "л")
                 },
                 new Product
                 {
@@ -219,7 +255,7 @@
                 new Product
                 {
                     Name = "Олио",
-                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "л")
                 },
                 new Product
                 {
@@ -249,7 +285,7 @@
                 new Product
                 {
                     Name = "Прясно краве мляко",
-                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "л")
                 },
                 new Product
                 {
@@ -289,6 +325,36 @@
                 new Product
                 {
                     Name = "Яйца",
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "бр")
+                },
+                new Product
+                {
+                    Name = "Телешко месо",
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                },
+                new Product
+                {
+                    Name = "Броколи",
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                },
+                new Product
+                {
+                    Name = "Заешко месо",
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                },
+                new Product
+                {
+                    Name = "Праскови",
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                },
+                new Product
+                {
+                    Name = "Ябълки",
+                    MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
+                },
+                new Product
+                {
+                    Name = "Бишкоти",
                     MeasurementUnit = context.MeasurementUnits.First(m => m.Name == "кг")
                 });
 
@@ -351,12 +417,42 @@
                 },
                 new Meal
                 {
+                    Name = "Крем супа картофи",
+                    MealType = context.MealTypes.First(t => t.Name == "Предястие")
+                },
+                new Meal
+                {
+                    Name = "Супа броколи",
+                    MealType = context.MealTypes.First(t => t.Name == "Предястие")
+                },
+                new Meal
+                {
                     Name = "Пуешко яхния",
                     MealType = context.MealTypes.First(t => t.Name == "Основно")
                 },
                 new Meal
                 {
+                    Name = "Телешко с картофи и моркови",
+                    MealType = context.MealTypes.First(t => t.Name == "Основно")
+                },
+                new Meal
+                {
+                    Name = "Заешко с ориз и броколи",
+                    MealType = context.MealTypes.First(t => t.Name == "Основно")
+                },
+                new Meal
+                {
                     Name = "Пшеница с мляко",
+                    MealType = context.MealTypes.First(t => t.Name == "Десерт")
+                },
+                new Meal
+                {
+                    Name = "Кисел от праскова и ябълка",
+                    MealType = context.MealTypes.First(t => t.Name == "Десерт")
+                },
+                new Meal
+                {
+                    Name = "Сладкиш с праскови и кисело мляко",
                     MealType = context.MealTypes.First(t => t.Name == "Десерт")
                 });
 
@@ -405,6 +501,86 @@
                 });
             #endregion
 
+            #region Recipe Крем супа картофи
+            context.Recipes.AddOrUpdate(
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Крем супа картофи"),
+                    Product = context.Products.First(p => p.Name == "Картофи"),
+                    Quantity = 10
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Крем супа картофи"),
+                    Product = context.Products.First(p => p.Name == "Лук - кромид"),
+                    Quantity = 5
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Крем супа картофи"),
+                    Product = context.Products.First(p => p.Name == "Брашно"),
+                    Quantity = 0.500f
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Крем супа картофи"),
+                    Product = context.Products.First(p => p.Name == "Олио"),
+                    Quantity = 0.100f
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Крем супа картофи"),
+                    Product = context.Products.First(p => p.Name == "Яйца"),
+                    Quantity = 13
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Крем супа картофи"),
+                    Product = context.Products.First(p => p.Name == "Сол"),
+                    Quantity = 0.025f
+                });
+            #endregion
+
+            #region Recipe Супа броколи
+            context.Recipes.AddOrUpdate(
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Супа броколи"),
+                    Product = context.Products.First(p => p.Name == "Броколи"),
+                    Quantity = 12
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Супа броколи"),
+                    Product = context.Products.First(p => p.Name == "Лук - кромид"),
+                    Quantity = 5
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Супа броколи"),
+                    Product = context.Products.First(p => p.Name == "Олио"),
+                    Quantity = 0.100f
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Супа броколи"),
+                    Product = context.Products.First(p => p.Name == "Ориз"),
+                    Quantity = 0.500f
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Супа броколи"),
+                    Product = context.Products.First(p => p.Name == "Магданоз"),
+                    Quantity = 0.500f
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Супа броколи"),
+                    Product = context.Products.First(p => p.Name == "Сол"),
+                    Quantity = 0.025f
+                });
+            #endregion
+
             #region Recipe Пуешко яхния
             context.Recipes.AddOrUpdate(
                 new Recipe
@@ -445,6 +621,52 @@
                 });
             #endregion
 
+            #region Recipe Телешко с картофи и моркови
+            context.Recipes.AddOrUpdate(
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Телешко с картофи и моркови"),
+                Product = context.Products.First(p => p.Name == "Лук - кромид"),
+                Quantity = 2.800f
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Телешко с картофи и моркови"),
+                Product = context.Products.First(p => p.Name == "Магданоз"),
+                Quantity = 0.500f
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Телешко с картофи и моркови"),
+                Product = context.Products.First(p => p.Name == "Олио"),
+                Quantity = 0.500f
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Телешко с картофи и моркови"),
+                Product = context.Products.First(p => p.Name == "Сол"),
+                Quantity = 0.025f
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Телешко с картофи и моркови"),
+                Product = context.Products.First(p => p.Name == "Телешко месо"),
+                Quantity = 4
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Телешко с картофи и моркови"),
+                Product = context.Products.First(p => p.Name == "Картофи"),
+                Quantity = 1.300f
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Телешко с картофи и моркови"),
+                Product = context.Products.First(p => p.Name == "Моркови"),
+                Quantity = 1.200f
+            });
+            #endregion
+
             #region Recipe Пшеница с мляко
             context.Recipes.AddOrUpdate(
                 new Recipe
@@ -472,7 +694,63 @@
                     Quantity = 2
                 });
             #endregion
-            
+
+            #region Recipe Кисел от праскова и ябълка
+            context.Recipes.AddOrUpdate(
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Кисел от праскова и ябълка"),
+                    Product = context.Products.First(p => p.Name == "Праскови"),
+                    Quantity = 8
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Кисел от праскова и ябълка"),
+                    Product = context.Products.First(p => p.Name == "Захар"),
+                    Quantity = 0.500f
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Кисел от праскова и ябълка"),
+                    Product = context.Products.First(p => p.Name == "Ябълки"),
+                    Quantity = 9
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Кисел от праскова и ябълка"),
+                    Product = context.Products.First(p => p.Name == "Нишесте"),
+                    Quantity = 0.200f
+                },
+                new Recipe
+                {
+                    Meal = context.Meals.First(m => m.Name == "Кисел от праскова и ябълка"),
+                    Product = context.Products.First(p => p.Name == "Прясно краве мляко"),
+                    Quantity = 1.300f
+                });
+            #endregion
+
+            #region Recipe Сладкиш с праскови и кисело мляко
+            context.Recipes.AddOrUpdate(
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Сладкиш с праскови и кисело мляко"),
+                Product = context.Products.First(p => p.Name == "Праскови"),
+                Quantity = 8
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Сладкиш с праскови и кисело мляко"),
+                Product = context.Products.First(p => p.Name == "Кисело мляко"),
+                Quantity = 1.500f
+            },
+            new Recipe
+            {
+                Meal = context.Meals.First(m => m.Name == "Сладкиш с праскови и кисело мляко"),
+                Product = context.Products.First(p => p.Name == "Бишкоти"),
+                Quantity = 1.200f
+            });
+            #endregion
+
             context.SaveChanges();
         }
 

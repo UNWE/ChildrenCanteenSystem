@@ -1,7 +1,7 @@
 ﻿namespace Data.Data
 {
     using Models;
-    using SkillExchange.Data.Repositories;
+    using Repositories;
 
     public interface IChildrenCanteenSystemData
     {

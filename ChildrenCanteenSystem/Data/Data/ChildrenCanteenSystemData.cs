@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Context;
     using Models;
-    using SkillExchange.Data.Repositories;
+    using Repositories;
 
     public class ChildrenCanteenSystemData : IChildrenCanteenSystemData
     {
@@ -12,9 +12,9 @@
 
         private readonly IDictionary<Type, object> repositories;
 
-        public ChildrenCanteenSystemData() : this(new ChildrenSystemDbContext())
+        public ChildrenCanteenSystemData()
+            : this(new ChildrenSystemDbContext())
         {
-            
         }
 
         public ChildrenCanteenSystemData(IChildrenCanteenSystemDbContext dbContext)

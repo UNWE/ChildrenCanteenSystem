@@ -1,4 +1,4 @@
-﻿namespace SkillExchange.Data.Repositories
+﻿namespace Data.Repositories
 {
     using System.Data.Entity;
 

@@ -2,9 +2,13 @@
 {
     public static class FormsTitles
     {
+        public static string LoginTitle = "Вход";
+
         public static string BeginTitle = "Начало";
 
-        public static string AttentionTitle = "Внимание";
+        public static string ReviewMealsTitle = "Ястия преглед";
+
+        public static string NewMealTitle = "Ново ястие";
 
         public static string NewMenuTitle = "Ново меню";
 

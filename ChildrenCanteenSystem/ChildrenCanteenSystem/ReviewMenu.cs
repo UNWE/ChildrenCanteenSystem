@@ -1,6 +1,7 @@
 ﻿namespace ChildrenCanteenSystem
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Windows.Forms;
@@ -11,6 +12,7 @@
     public partial class ReviewMenu : BaseForm
     {
         private DateTime date;
+        private Models.Menu menuSelected;
 
         public ReviewMenu(User userProfile, DateTime date)
             : base(userProfile)
@@ -99,7 +101,9 @@
             if (preliminaryCalculation != null)
             {
                 var result = MessageBox.Show(
+                    string.Format(
                     ConfirmMessages.ConfirmReviewPrelimianryCalculationMessage,
+                    this.date.ToLongDateString()),
                     MessageBoxesTitles.AttentionTitle,
                     MessageBoxButtons.YesNo);
 
@@ -191,6 +195,7 @@
                 .All()
                 .Select(m => new
                 {
+                    m.Id,
                     m.Date,
                     m.FoodCards,
                     Meals = m.Meals.Select(meal => meal.Name).ToList()
@@ -199,6 +204,7 @@
 
             if (menu != null)
             {
+                this.menuSelected = this.data.Menus.Find(menu.Id);
                 this.firstMealTextBox.Text = menu.Meals[0];
                 this.secondMealTextBox.Text = menu.Meals[1];
                 this.thirdMealTextBox.Text = menu.Meals[2];
@@ -223,22 +229,19 @@
 
             if (result == DialogResult.Yes)
             {
-                var firstMealId = this.firstMeal.SelectedValue;
-                var secondMealId = this.secondMeal.SelectedValue;
-                var thirdMealId = this.thirdMeal.SelectedValue;
+                int firstMealId = (int)this.firstMeal.SelectedValue;
+                int secondMealId = (int)this.secondMeal.SelectedValue;
+                int thirdMealId = (int)this.thirdMeal.SelectedValue;
 
-                base.data.Menus.Add(
-                    new Models.Menu
-                    {
-                        Date = date,
-                        Meals =
-                        {
-                            base.data.Meals.Find(firstMealId),
-                            base.data.Meals.Find(secondMealId),
-                            base.data.Meals.Find(thirdMealId)
-                        }
-                    });
+                this.menuSelected.Meals.Clear();
+                this.menuSelected.Meals = new List<Meal>
+                {
+                    this.data.Meals.Find(firstMealId),
+                    this.data.Meals.Find(secondMealId),
+                    this.data.Meals.Find(thirdMealId)
+                };
 
+                this.data.Menus.Update(this.menuSelected);
                 var saveResult = base.data.SaveChanges();
                 if (saveResult > 0)
                 {

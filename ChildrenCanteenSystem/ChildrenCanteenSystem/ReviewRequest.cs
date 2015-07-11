@@ -70,6 +70,10 @@
                     this.Close();
                 }
             }
+            else
+            {
+                this.pdfExportButton.Enabled = true;
+            }
         }
 
         private void products_SelectionChanged(object sender, EventArgs e)
@@ -133,7 +137,6 @@
             }
 
             return hasRequestForDate;
-
         }
 
         private void pdfExportButton_Click(object sender, EventArgs e)

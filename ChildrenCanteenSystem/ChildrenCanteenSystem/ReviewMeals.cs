@@ -1,6 +1,7 @@
 ﻿namespace ChildrenCanteenSystem
 {
     using System.Linq;
+    using Common.MessagesAndTitles;
     using Models;
 
     public partial class ReviewMeals : BaseForm
@@ -11,7 +12,7 @@
 
             #region Form settings
 
-            this.Text = "Ястия преглед";
+            this.Text = FormsTitles.ReviewMealsTitle;
 
             #endregion
         }

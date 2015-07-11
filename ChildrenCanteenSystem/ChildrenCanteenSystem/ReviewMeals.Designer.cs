@@ -71,6 +71,7 @@
             this.Quantity});
             this.recipes.Location = new System.Drawing.Point(59, 328);
             this.recipes.Name = "recipes";
+            this.recipes.ReadOnly = true;
             this.recipes.RowTemplate.Height = 28;
             this.recipes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.recipes.Size = new System.Drawing.Size(780, 197);
@@ -86,6 +87,7 @@
             // 
             this.MeasurementUnit.HeaderText = "Мярка";
             this.MeasurementUnit.Name = "MeasurementUnit";
+            this.MeasurementUnit.ReadOnly = true;
             // 
             // Quantity
             // 
@@ -120,6 +122,7 @@
             this.Type});
             this.meals.Location = new System.Drawing.Point(154, 70);
             this.meals.Name = "meals";
+            this.meals.ReadOnly = true;
             this.meals.RowTemplate.Height = 28;
             this.meals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.meals.Size = new System.Drawing.Size(578, 177);

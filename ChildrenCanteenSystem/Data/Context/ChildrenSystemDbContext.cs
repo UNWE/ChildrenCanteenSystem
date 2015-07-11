@@ -9,7 +9,9 @@
         public ChildrenSystemDbContext()
             : base("ChildrenCanteenSystemDbConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ChildrenSystemDbContext, ChildrenCanteenSystemDbMigrationConfiguration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<
+                ChildrenSystemDbContext,
+                ChildrenCanteenSystemDbMigrationConfiguration>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

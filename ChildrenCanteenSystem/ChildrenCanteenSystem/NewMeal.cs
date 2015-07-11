@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Windows.Forms;
 
+    using Common.MessagesAndTitles;
     using Enumerations;
     using Events;
     using Models;
@@ -19,6 +20,12 @@
             this.DataSelected += this.SelectData;
 
             this.saveButton.Enabled = false;
+
+            #region Form settings
+
+            this.Text = FormsTitles.NewMealTitle;
+
+            #endregion
         }
 
         private event DataSelectedEventHandler DataSelected;
@@ -130,8 +137,8 @@
         private void saveButton_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(
-                Common.MessagesAndTitles.ConfirmMessages.ConfirmSaveMealMessage,
-                Common.MessagesAndTitles.MessageBoxesTitles.ConfirmTitle,
+                ConfirmMessages.ConfirmSaveMealMessage,
+                MessageBoxesTitles.ConfirmTitle,
                 MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
@@ -169,23 +176,23 @@
                     if (saveResult > 0)
                     {
                         MessageBox.Show(
-                            Common.MessagesAndTitles.SuccessMessages.MealSavedSuccessfullyMessage,
-                            Common.MessagesAndTitles.MessageBoxesTitles.SuccessTitle);
+                            SuccessMessages.MealSavedSuccessfullyMessage,
+                            MessageBoxesTitles.SuccessTitle);
                     }
                     else
                     {
                         MessageBox.Show(
-                            Common.MessagesAndTitles.ErrorMessages.MealNotSavedErrorMessage,
-                            Common.MessagesAndTitles.MessageBoxesTitles.AttentionTitle);
+                            ErrorMessages.MealNotSavedErrorMessage,
+                            MessageBoxesTitles.AttentionTitle);
                     }
                 }
                 else
                 {
                     MessageBox.Show(
                         string.Format(
-                            Common.MessagesAndTitles.ErrorMessages.MealNameAlreadyTakenMessage,
+                            ErrorMessages.MealNameAlreadyTakenMessage,
                             mealName.Text),
-                        Common.MessagesAndTitles.MessageBoxesTitles.AttentionTitle);
+                        MessageBoxesTitles.AttentionTitle);
                 }
             }
         }
